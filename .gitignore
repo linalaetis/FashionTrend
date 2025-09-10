@@ -10,17 +10,45 @@ env/
 
 # Caches Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 
 # Notebooks
 .ipynb_checkpoints/
+.virtual_documents/
 
 # Logs / temporaires
 *.log
 *.tmp
+*.bak
+*.swp
+*.swo
+
+# --- Données brutes / résultats intermédiaires ---
+data/raw/
+data/interim/
+data/temp/
+*.h5
+*.hdf5
+*.sqlite
+*.db
+
+# --- Fichiers de build / distribution ---
+build/
+dist/
+*.egg-info/
+.eggs/
+*.manifest
+*.spec
 
 # OS / IDE
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+
+# --- Tests ---
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
