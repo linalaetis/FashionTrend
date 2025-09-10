@@ -1,0 +1,59 @@
+# --- Normalisation des fins de ligne ---
+# Par défaut, normaliser tous les fichiers texte en LF dans le repo
+* text=auto eol=lf
+
+# Scripts batch Windows : garder CRLF (pour compatibilité)
+*.bat text eol=crlf
+
+# --- Types de fichiers courants ---
+# Code Python
+*.py text
+
+# Notebooks Jupyter (JSON)
+*.ipynb text
+
+# Config & data texte
+*.txt text
+*.md  text
+*.csv text
+*.tsv text
+*.json text
+*.yaml text
+*.yml text
+*.ini text
+*.cfg text
+*.toml text
+
+# Shell / PowerShell
+*.sh  text eol=lf
+*.ps1 text
+
+# HTML/CSS/JS (si tu en as)
+*.html text
+*.css  text
+*.js   text
+*.ts   text
+
+# --- Binaire : ne pas normaliser ---
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.pdf  binary
+*.zip  binary
+*.tar  binary
+*.gz   binary
+*.7z   binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.otf  binary
+*.dll  binary
+*.so   binary
+
+# --- Spécifiques IDE/OS (si versionnés) ---
+*.sln text
+*.vcxproj text
+*.iml text
+.DS_Store binary
+Thumbs.db binary
