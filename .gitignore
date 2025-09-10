@@ -1,0 +1,26 @@
+# Environnements / secrets
+.env
+*.env
+
+# Environnements virtuels
+venv/
+.venv/
+env/
+.env/
+
+# Caches Python
+__pycache__/
+*.pyc
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Logs / temporaires
+*.log
+*.tmp
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
