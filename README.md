@@ -16,7 +16,7 @@
 
 ######
 
-* ###### Segmentation vestimentaire : être capable d'identifier et d'isoler avec précision chaque pièce vestimentaire dans une image.
+* ###### Segmentation vestimentaire : être capable d'identifier et d'isoler avec précision chaque pièce vestimentaire dans une image. Actuellement c'est l'unique fonctionnalité qui sera développée en premier temps.
 
 ######
 
