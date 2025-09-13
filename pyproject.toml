@@ -1,7 +1,7 @@
 [project]
-name = "fashiontrend"
+name = "FashionTrend"
 version = "0.1.0"
-description = "premier projet pour la formation openclassroom"
+description = "un projet IA Python/Jupyter qui vise à développer un système automatisé d'analyse des tendances vestimentaires sur les réseaux sociaux"
 authors = [
     {name = "lina NKAKOU"}
 ]
