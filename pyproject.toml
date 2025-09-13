@@ -25,4 +25,48 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.30.1"
+ruff = "^0.13.0"
+black = "^25.1.0"
+pre-commit = "^4.3.0"
+nbstripout = "^0.8.1"
+pytest = "^8.4.2"
+pytest-cov = "^7.0.0"
 
+
+[tool.black]
+line-length = 100
+target-version = ["py313"]
+# Utilise une chaîne (regex). Les triples quotes TOML sont OK.
+exclude = '''
+/(
+  \.git
+ | \.venv
+ | venv
+ | env
+ | data
+ | outputs
+ | models
+)/
+'''
+
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+exclude = ["data", "outputs", "models", ".venv", "venv", "env", ".git"]
+
+[tool.ruff.lint]
+extend-select = ["E", "F", "I", "B", "UP"]
+extend-ignore = ["E203"]
+
+[tool.ruff.lint.per-file-ignores]
+"notebooks/**/*.ipynb" = ["E501", "E999"]
+
+[tool.ruff.format]
+quote-style = "preserve"
+
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-q --maxfail=1"
+testpaths = ["tests"]

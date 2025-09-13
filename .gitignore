@@ -13,6 +13,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Données volumineuses / artefacts
+models/
+outputs/
+data/interim/
+data/processed/
+secrets_report.md
+
 # Notebooks
 .ipynb_checkpoints/
 .virtual_documents/
