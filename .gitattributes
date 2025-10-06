@@ -7,22 +7,22 @@
 
 # --- Types de fichiers courants ---
 # Code Python
-*.py text
+*.py text eol=lf
 
 # Notebooks Jupyter (JSON)
-*.ipynb text
+*.ipynb text eol=lf
 
 # Config & data texte
 *.txt text
-*.md  text
+*.md  text eol=lf
 *.csv text
 *.tsv text
 *.json text
-*.yaml text
-*.yml text
+*.yaml text eol=lf
+*.yml text eol=lf
 *.ini text
 *.cfg text
-*.toml text
+*.toml text eol=lf
 
 # Shell / PowerShell
 *.sh  text eol=lf

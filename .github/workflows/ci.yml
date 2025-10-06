@@ -22,6 +22,12 @@ jobs:
       - name: Configure Poetry virtualenvs
         run: poetry config virtualenvs.create true
 
+      - name: Install pre-commit
+        run: poetry run pip install pre-commit
+
+      - name: Run pre-commit (all files)
+        run: poetry run pre-commit run --all-files --show-diff-on-failure --color always
+
       - name: Install dependencies (with dev)
         run: poetry install --with dev
 
@@ -35,7 +41,25 @@ jobs:
         run: poetry run pytest -q
 
       - name: Secret scan
-        run: poetry run python scan_secrets.py --skip-outputs --out secrets_report.md
+	run: |
+      	  # Nettoie un éventuel ancien rapport
+      	  rm -f secrets_report.md
+
+      	  poetry run python scan_secrets.py \
+            --skip-outputs \
+            --allow-pattern '^\s*HF_TOKEN=.*$' \
+            --exclude '(^|/)\.env($|/|\.|$)|(^|/)\.ipynb_checkpoints(/|$)|(^|/)\.virtual_documents(/|$)|(^|/)secrets_report\.md$' \
+            --out secrets_report.md
+
+      	  echo "=== Scan report (first 200 lines) ==="
+      	  head -n 200 secrets_report.md || true
+
+      - name: Fail if findings
+    	run: |
+      	  if grep -Eq "(ATTENTION|High-entropy string)" secrets_report.md; then
+            echo "::error::Secret(s) detected. See secrets_report.md"
+            exit 1
+     	  fi
 
       - name: Upload secrets report
         if: always()
@@ -43,3 +67,4 @@ jobs:
         with:
           name: secrets-report
           path: secrets_report.md
+	  if-no-files-found: ignore

@@ -1,3 +1,10 @@
+# ENV NOTEs
+
+- Python: 3.13.5
+- OS: Windows-11-10.0.26100-SP0
+
+## Paquets (pip freeze)
+
 asttokens==3.0.0
 attrs==25.3.0
 black==25.1.0

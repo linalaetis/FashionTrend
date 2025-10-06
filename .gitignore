@@ -19,6 +19,7 @@ outputs/
 data/interim/
 data/processed/
 secrets_report.md
+docs/*.docx
 
 # Notebooks
 .ipynb_checkpoints/
@@ -59,3 +60,6 @@ Thumbs.db
 htmlcov/
 .tox/
 .pytest_cache/
+docs/*.docx
+secrets_report.md
+secrets_report.md

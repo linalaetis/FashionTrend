@@ -1,4 +1,41 @@
 repos:
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.8.1
+    hooks:
+      - id: nbstripout
+
+  - repo: local
+    hooks:
+      - id: scan-secrets
+        name: Scan secrets (FashionTrend)
+        entry: poetry
+        language: system
+        pass_filenames: false
+        stages: [pre-commit, pre-push]
+        args:
+          - run
+          - python
+          - scan_secrets.py
+          - --root
+          - .
+          - --skip-outputs
+          - --allow-pattern
+          - '^\s*HF_TOKEN=.*$'
+          - --exclude
+          - '^notebooks[\\/]'
+          - --exclude
+          - '\.ipynb_checkpoints'
+          - --exclude
+          - '\.virtual_documents'
+          - --exclude
+          - '^secrets_report\.md$'
+          - --exclude
+          - '[\\/]secrets_report\.md$'
+          - --exclude
+          - '^\.git[\\/]'
+          - --out
+          - .git/secrets_report.md
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
@@ -11,14 +48,13 @@ repos:
     rev: v0.13.0
     hooks:
       - id: ruff
+        args: [--fix]
+        files: \.py$
       - id: ruff-format
+        files: \.py$
 
   - repo: https://github.com/psf/black
     rev: 25.1.0
     hooks:
       - id: black
-
-  - repo: https://github.com/kynan/nbstripout
-    rev: 0.8.1
-    hooks:
-      - id: nbstripout
+        files: \.py$
