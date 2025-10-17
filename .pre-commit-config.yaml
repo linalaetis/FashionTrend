@@ -1,9 +1,11 @@
 repos:
+  # 1) Nettoyer d'abord les sorties des notebooks
   - repo: https://github.com/kynan/nbstripout
     rev: 0.8.1
     hooks:
       - id: nbstripout
 
+  # 2) Hooks locaux : scan des secrets + interdiction de push direct vers main
   - repo: local
     hooks:
       - id: scan-secrets
@@ -36,6 +38,29 @@ repos:
           - --out
           - .git/secrets_report.md
 
+      - id: forbid-direct-push-main
+        name: Forbid direct push to main
+        entry: python
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
+        args:
+          - -c
+          - |
+            import os, subprocess, sys
+            branch = subprocess.check_output(
+                ["git", "rev-parse", "--abbrev-ref", "HEAD"], text=True
+            ).strip()
+            # Allow one-time override by setting ALLOW_MAIN_PUSH=1
+            if branch in ("main", "master") and os.getenv("ALLOW_MAIN_PUSH", "0") != "1":
+                sys.stderr.write(
+                    "Push to 'main' is blocked. Create a branch and open a PR.\n"
+                    "Temporary override: set ALLOW_MAIN_PUSH=1 then push.\n"
+                )
+                sys.exit(1)
+
+
+  # 3) Hooks utilitaires
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
@@ -44,6 +69,7 @@ repos:
       - id: trailing-whitespace
       - id: mixed-line-ending
 
+  # 4) Ruff/format et Black uniquement sur .py (les .ipynb sont exclus)
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.13.0
     hooks:
